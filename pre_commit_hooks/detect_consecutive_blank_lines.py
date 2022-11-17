@@ -11,7 +11,3 @@ def main(argv) -> int:
             print(f'{filename}')
 
     return retcode
-
-
-if __name__ == '__main__':
-    raise SystemExit(main())
