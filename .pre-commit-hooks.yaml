@@ -1,0 +1,6 @@
+- id: detect-consecutive-blank-lines
+  name: detect any consecutive blank lines
+  description: detects any cases of two or more consecutive blank lines in a file
+  entry: detect-consecutive-blank-lines
+  language: python
+  types: [text]

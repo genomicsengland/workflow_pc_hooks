@@ -1,0 +1,25 @@
+{
+    "_meta": {
+        "hash": {
+            "sha256": "1975ef08f91a983d8c2eed8bd46b7cad2cf59890a3b144b72c8ca668be442c69"
+        },
+        "pipfile-spec": 6,
+        "requires": {
+            "python_version": "3.9"
+        },
+        "sources": [
+            {
+                "name": "pypi",
+                "url": "https://pypi.org/simple",
+                "verify_ssl": true
+            }
+        ]
+    },
+    "default": {
+        "nextflow-hooks": {
+            "path": ".",
+            "version": "==0.1.0"
+        }
+    },
+    "develop": {}
+}
