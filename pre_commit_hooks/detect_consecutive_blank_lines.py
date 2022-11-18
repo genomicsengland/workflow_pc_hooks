@@ -3,7 +3,9 @@ from __future__ import annotations
 import argparse
 
 
-def detect_consecutive_blank_lines(contents: list, filename: str = '<unknown>') -> int:
+def detect_consecutive_blank_lines(
+    contents: list, filename: str = '<unknown>'
+) -> tuple[int, int]:
     """
     returns non-zero if the src contains consecutive blank lines
     """
