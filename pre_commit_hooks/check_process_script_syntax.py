@@ -43,6 +43,7 @@ def extract_script(contents: list, start: int, end: int) -> str:
     clean[0] = re.sub('"""', '', clean[0])  # remove triple quotes
     clean[-1] = re.sub('"""', '', clean[-1])  # remove triple quotes
     clean = [x.lstrip() for x in clean]  # unindent
+    clean = [x.replace('\\$', '$') for x in clean]  # unescape any escaped dollars
 
     return clean
 
