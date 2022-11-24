@@ -6,31 +6,9 @@ TEST_FILES = [
     ('testing/resources/example.nf', True),
     ('testing/resources/example_fail_single_quote_script_block.nf', False),
 ]
-EXPECTED_SCRIPT_LINES = [
-    (114, 124),
-    (152, 169),
-    (211, 236),
-    (269, 306),
-    (336, 355),
-    (410, 441),
-    (466, 484),
-    (509, 514),
-]
 
 
 class TestDetectSingleQuoteScriptBlocks(unittest.TestCase):
-    def test_isolate_process_scripts(self):
-
-        with open(TEST_FILES[0][0]) as f:
-            contents = f.readlines()
-
-        script_lines = detect_single_quote_script_blocks.isolate_process_scripts(
-            contents
-        )
-        expected = [(start - 1, end - 1) for start, end in EXPECTED_SCRIPT_LINES]
-
-        self.assertListEqual(script_lines, expected)
-
     def test_detect_valid_script_block_type(self):
 
         scenarios = [
@@ -46,13 +24,9 @@ class TestDetectSingleQuoteScriptBlocks(unittest.TestCase):
 
         for lines, pass_test in scenarios:
 
-            print(lines)
-
             result = detect_single_quote_script_blocks.detect_valid_script_block_type(
                 lines[0], lines[1]
             )
-
-            print(result)
 
             self.assertEqual(pass_test, result == 0)
 

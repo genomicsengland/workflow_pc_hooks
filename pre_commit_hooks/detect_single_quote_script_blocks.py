@@ -3,33 +3,7 @@ from __future__ import annotations
 import argparse
 import re
 
-
-def isolate_process_scripts(contents: list[str]) -> list[str]:
-    """
-    isolates the process scripts from within the flow
-    """
-
-    regexs = [
-        ('process', r'^\s*process \w+ {'),
-        ('script', r'^\s*(script|shell|exec):'),
-        ('start_block', r'^.*("""|\'\'\').*$'),
-        ('end_block', r'^.*("""|\'\'\').*$'),
-    ]
-
-    # find the process blocks
-    bits = []
-    regex_index = 0
-    current_search = regexs[regex_index]
-    for i, l in enumerate(contents):
-        if re.match(current_search[1], l):
-            if current_search[0] == 'start_block':
-                start_of_this_block = i
-            elif current_search[0] == 'end_block':
-                bits.append((start_of_this_block, i))
-            regex_index += 1
-            current_search = regexs[regex_index % len(regexs)]
-
-    return bits
+from pre_commit_hooks import util
 
 
 def detect_valid_script_block_type(start_line: str, end_line: str) -> int:
@@ -54,7 +28,7 @@ def process_file_contents(contents: list, filename: str) -> int:
     process a file and all it's script blocks
     """
 
-    script_blocks = isolate_process_scripts(contents)
+    script_blocks = util.isolate_process_scripts(contents)
 
     print(f'{filename}: {len(script_blocks)} script blocks found')
 
