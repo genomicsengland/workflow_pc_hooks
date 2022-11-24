@@ -8,3 +8,8 @@
   description: checks that the contents of any script blocks in process definitions
   entry: check-process-script-syntax
   language: python
+- id: detect-single-quote-script-blocks
+  name: detect single quote delimited script blocks
+  description: detects any script blocks that have been delimited by triple single quotes
+  entry: detect-single-quote-script-blocks
+  language: python
