@@ -13,3 +13,8 @@
   description: detects any script blocks that have been delimited by triple single quotes
   entry: detect-single-quote-script-blocks
   language: python
+- id: detect-non-bash-shebangs
+  name: detect non-bash shebangs in script blocks
+  description: detects any script blocks that have a non-bash shebang (if they have a shebang)
+  entry: detect-non-bash-shebangs
+  language: python
