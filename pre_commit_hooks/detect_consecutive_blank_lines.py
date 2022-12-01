@@ -30,6 +30,18 @@ def detect_consecutive_blank_lines(
     return retv, error_line_nums
 
 
+def remove_lines(contents: list, line_nums: list):
+    """
+    remove lines from file contents
+    """
+
+    for ele in sorted(line_nums, reverse=True):
+
+        del contents[ele]
+
+    return contents
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument('filenames', nargs='*')
