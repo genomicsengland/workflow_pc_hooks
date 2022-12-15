@@ -5,6 +5,7 @@ from pre_commit_hooks import detect_single_quote_script_blocks
 TEST_FILES = [
     ('testing/resources/example.nf', True),
     ('testing/resources/example_fail_single_quote_script_block.nf', False),
+    ('testing/resources/example_fail_single_quote_script_block_ignored.nf', True),
 ]
 
 

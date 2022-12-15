@@ -5,6 +5,8 @@ import re
 
 from pre_commit_hooks import util
 
+IGNORE_FLAG = 'detect-single-quote-script-blocks'
+
 
 def detect_valid_script_block_type(start_line: str, end_line: str) -> int:
     """
@@ -38,9 +40,11 @@ def process_file_contents(contents: list, filename: str) -> int:
 
         returncode = detect_valid_script_block_type(contents[start], contents[end])
 
-        retv |= returncode
+        if returncode == 1 and IGNORE_FLAG not in util.get_ignore_flags_on_line(
+            contents[start]
+        ):
 
-        if returncode == 1:
+            retv |= returncode
 
             print(f'single quote script block at lines {start + 1}:{end + 1}')
 
