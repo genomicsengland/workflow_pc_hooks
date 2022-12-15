@@ -41,7 +41,7 @@ def process_file_contents(contents: list, filename: str) -> int:
         returncode = detect_valid_script_block_type(contents[start], contents[end])
 
         if returncode == 1 and IGNORE_FLAG not in util.get_ignore_flags_on_line(
-            contents[start]
+            contents[start - 1]
         ):
 
             retv |= returncode

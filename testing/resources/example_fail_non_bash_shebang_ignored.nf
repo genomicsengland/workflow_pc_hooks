@@ -506,7 +506,8 @@ process dump_versions {
     path "software_versions.yml"
 
     script:
-    """ #ignore: detect-non-bash-shebangs
+    //ignore: detect-non-bash-shebangs
+    """
     #!/bin/python
     dump_versions.py \
     --versions ${versions} \

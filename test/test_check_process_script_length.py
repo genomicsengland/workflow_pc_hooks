@@ -40,7 +40,8 @@ class TestCheckProcessScriptLength(unittest.TestCase):
                 [
                     'process something {',
                     'script:',
-                    '""" #ignore: check-process-script-length',
+                    '//ignore: check-process-script-length',
+                    '"""',
                     *['soemthing'] * 21,
                     '"""',
                 ],
@@ -51,7 +52,8 @@ class TestCheckProcessScriptLength(unittest.TestCase):
                 [
                     'process something {',
                     'script:',
-                    '""" #ignore: something-other-flag',
+                    '//ignore: ignore-something-else',
+                    '"""',
                     *['soemthing'] * 21,
                     '"""',
                 ],

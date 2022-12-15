@@ -111,7 +111,8 @@ process fetch_coords {
     path("*_genes_not_found.txt")
 
     script:
-    """ #ignore: check-process-script-length
+    //ignore: check-process-script-length
+    """
     fetch_coords.R \
     --gene-input ${gene_input} \
     --coord-file ${coord_file} \

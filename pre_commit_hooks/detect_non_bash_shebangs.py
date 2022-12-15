@@ -40,7 +40,7 @@ def process_file_contents(contents: list, filename: str) -> int:
         unacceptable_shebangs = set(shebangs) - set(ACCEPTABLE_SHEBANGS)
 
         if unacceptable_shebangs and IGNORE_FLAG not in util.get_ignore_flags_on_line(
-            contents[start]
+            contents[start - 1]
         ):
 
             retv = 1

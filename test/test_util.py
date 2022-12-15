@@ -29,19 +29,15 @@ class TestUtil(unittest.TestCase):
     def test_get_ignore_flags_on_line(self):
 
         tests = [
-            ('#ignore:', []),
-            ('#ignore: a', ['a']),
-            ('#ignore: a b', ['a', 'b']),
-            ('#ignore: abc', ['abc']),
-            ('#ignore: abc def', ['abc', 'def']),
-            ('#ignore: ab-c D-ef', ['ab-c', 'D-ef']),
-            ('fdsjk fdsjk #ignore: a', ['a']),
-            ('fdsjk fdsjk #ignore: a b', ['a', 'b']),
-            ('fdsjk fdsjk #ignore: abc', ['abc']),
-            ('fdsjk fdsjk #ignore: abc def', ['abc', 'def']),
-            ('fdsjk fdsjk #ignore: ab-c D-ef', ['ab-c', 'D-ef']),
-            ('fdsjk fdsjk #ignore abc def', []),
-            ('fdsjk fdsjk ignore abc def', []),
+            ('//ignore:', []),
+            ('//ignore: a', ['a']),
+            ('//ignore: a b', ['a', 'b']),
+            ('//ignore: abc', ['abc']),
+            ('//ignore: abc def', ['abc', 'def']),
+            ('//ignore: ab-c D-ef', ['ab-c', 'D-ef']),
+            ('  //ignore: ab-c D-ef', ['ab-c', 'D-ef']),
+            ('	//ignore: ab-c D-ef', ['ab-c', 'D-ef']),
+            ('something not allowed //ignore: ab-c D-ef', []),
         ]
 
         for line, flags in tests:

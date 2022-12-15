@@ -57,7 +57,8 @@ class TestDetectNonBashShebangs(unittest.TestCase):
                 [
                     'process something {',
                     'script:',
-                    '""" #ignore: detect-non-bash-shebangs',
+                    '//ignore: detect-non-bash-shebangs',
+                    '"""',
                     '#!/bin/python',
                     '"""',
                 ],
@@ -68,7 +69,8 @@ class TestDetectNonBashShebangs(unittest.TestCase):
                 [
                     'process something {',
                     'script:',
-                    '""" #ignore: some-other-thing',
+                    '//ignore: some-other-thing',
+                    '"""',
                     '#!/bin/python',
                     '"""',
                 ],

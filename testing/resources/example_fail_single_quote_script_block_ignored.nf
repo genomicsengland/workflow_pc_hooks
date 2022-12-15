@@ -463,7 +463,8 @@ process sum_and_annotate {
     path('versions.yml') into ch_versions_sum_and_annotate
 
     script:
-    ''' #ignore: detect-single-quote-script-blocks
+    //ignore: detect-single-quote-script-blocks
+    '''
     set -eou pipefail
 
     sum_and_annotate.R \

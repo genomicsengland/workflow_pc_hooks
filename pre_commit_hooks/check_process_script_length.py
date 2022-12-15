@@ -25,7 +25,7 @@ def process_file_contents(contents: list, filename: str, max_block_length: int) 
 
         if (
             block_length > max_block_length
-            and IGNORE_FLAG not in util.get_ignore_flags_on_line(contents[start])
+            and IGNORE_FLAG not in util.get_ignore_flags_on_line(contents[start - 1])
         ):
 
             retv |= 1

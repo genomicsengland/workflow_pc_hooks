@@ -506,7 +506,8 @@ process dump_versions {
     path "software_versions.yml"
 
     script:
-    """ #ignore: check-process-script-syntax
+    //ignore: check-process-script-syntax
+    """
     dump_versions.py \
     --versions ${versions} \
     --command "Command:\n${workflow.commandLine}\n \

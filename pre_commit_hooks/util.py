@@ -36,7 +36,7 @@ def get_ignore_flags_on_line(line: str) -> list[str]:
     get the flags being pass as ignore arguments on a line
     """
 
-    ignore_regex = r'#ignore: ([\w\- ]+)'
+    ignore_regex = r'^\s*//ignore: ([\w\- ]+)'
 
     res = re.search(ignore_regex, line)
 

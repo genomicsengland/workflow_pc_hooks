@@ -65,7 +65,7 @@ def process_file_contents(contents: list, filename: str) -> int:
         result = check_script_syntax(extract_script(contents, start, end))
 
         if result.returncode > 0 and IGNORE_FLAG not in util.get_ignore_flags_on_line(
-            contents[start]
+            contents[start - 1]
         ):
 
             retv |= 1
