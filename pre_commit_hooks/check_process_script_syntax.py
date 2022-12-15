@@ -7,6 +7,8 @@ import tempfile
 
 from pre_commit_hooks import util
 
+IGNORE_FLAG = 'check-process-script-syntax'
+
 
 def extract_script(contents: list, start: int, end: int) -> str:
     """
@@ -62,7 +64,9 @@ def process_file_contents(contents: list, filename: str) -> int:
 
         result = check_script_syntax(extract_script(contents, start, end))
 
-        if result.returncode > 0:
+        if result.returncode > 0 and IGNORE_FLAG not in util.get_ignore_flags_on_line(
+            contents[start - 1]
+        ):
 
             retv |= 1
 

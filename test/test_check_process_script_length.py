@@ -5,6 +5,7 @@ from pre_commit_hooks import check_process_script_length
 TEST_FILES = [
     ('testing/resources/example.nf', True),
     ('testing/resources/example_fail_script_length.nf', False),
+    ('testing/resources/example_fail_script_length_ignored.nf', True),
 ]
 
 
@@ -32,6 +33,30 @@ class TestCheckProcessScriptLength(unittest.TestCase):
             (
                 # script over max script length
                 ['process something {', 'script:', '"""', *['soemthing'] * 21, '"""'],
+                False,
+            ),
+            (
+                # script over max script length but ignored
+                [
+                    'process something {',
+                    'script:',
+                    '//ignore: check-process-script-length',
+                    '"""',
+                    *['soemthing'] * 21,
+                    '"""',
+                ],
+                True,
+            ),
+            (
+                # script over max script length, wrong ignore flag
+                [
+                    'process something {',
+                    'script:',
+                    '//ignore: ignore-something-else',
+                    '"""',
+                    *['soemthing'] * 21,
+                    '"""',
+                ],
                 False,
             ),
         ]
