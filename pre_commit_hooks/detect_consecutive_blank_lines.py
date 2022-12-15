@@ -5,7 +5,7 @@ import argparse
 
 def detect_consecutive_blank_lines(
     contents: list, filename: str = '<unknown>'
-) -> tuple[int, int]:
+) -> tuple[int, list]:
     """
     returns non-zero if the src contains consecutive blank lines
     """

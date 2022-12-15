@@ -15,7 +15,7 @@ EXPECTED_SCRIPT_LINES = [
 ]
 
 
-class TestDetectSingleQuoteScriptBlocks(unittest.TestCase):
+class TestUtil(unittest.TestCase):
     def test_isolate_process_scripts(self):
 
         with open(TEST_FILE) as f:
@@ -25,3 +25,25 @@ class TestDetectSingleQuoteScriptBlocks(unittest.TestCase):
         expected = [(start - 1, end - 1) for start, end in EXPECTED_SCRIPT_LINES]
 
         self.assertListEqual(script_lines, expected)
+
+    def test_get_ignore_flags_on_line(self):
+
+        tests = [
+            ('#ignore:', []),
+            ('#ignore: a', ['a']),
+            ('#ignore: a b', ['a', 'b']),
+            ('#ignore: abc', ['abc']),
+            ('#ignore: abc def', ['abc', 'def']),
+            ('#ignore: ab-c D-ef', ['ab-c', 'D-ef']),
+            ('fdsjk fdsjk #ignore: a', ['a']),
+            ('fdsjk fdsjk #ignore: a b', ['a', 'b']),
+            ('fdsjk fdsjk #ignore: abc', ['abc']),
+            ('fdsjk fdsjk #ignore: abc def', ['abc', 'def']),
+            ('fdsjk fdsjk #ignore: ab-c D-ef', ['ab-c', 'D-ef']),
+            ('fdsjk fdsjk #ignore abc def', []),
+            ('fdsjk fdsjk ignore abc def', []),
+        ]
+
+        for line, flags in tests:
+
+            self.assertListEqual(flags, util.get_ignore_flags_on_line(line))
