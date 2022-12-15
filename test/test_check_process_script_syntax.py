@@ -5,6 +5,7 @@ from pre_commit_hooks import check_process_script_syntax
 TEST_FILES = [
     ('testing/resources/example.nf', True),
     ('testing/resources/example_fail_script_syntax_check.nf', False),
+    ('testing/resources/example_fail_script_syntax_check_ignored.nf', True),
 ]
 
 
