@@ -4,6 +4,8 @@ import argparse
 
 from pre_commit_hooks import util
 
+IGNORE_FLAG = 'check-process-script-length'
+
 
 def process_file_contents(contents: list, filename: str, max_block_length: int) -> int:
     """
@@ -21,7 +23,10 @@ def process_file_contents(contents: list, filename: str, max_block_length: int) 
         # than the difference between these two
         block_length = end - start - 1
 
-        if block_length > max_block_length:
+        if (
+            block_length > max_block_length
+            and IGNORE_FLAG not in util.get_ignore_flags_on_line(contents[start])
+        ):
 
             retv |= 1
             print(f'{filename}: script block at {start} is {block_length} lines long')

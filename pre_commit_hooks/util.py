@@ -3,7 +3,7 @@ from __future__ import annotations
 import re
 
 
-def isolate_process_scripts(contents: list[str]) -> list[str]:
+def isolate_process_scripts(contents: list[str]) -> list[tuple]:
     """
     isolates the process scripts from within the flow
     """
