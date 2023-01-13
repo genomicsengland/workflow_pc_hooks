@@ -18,3 +18,9 @@
   description: detects any script blocks that have a non-bash shebang (if they have a shebang)
   entry: detect-non-bash-shebangs
   language: python
+- id: check-process-script-length
+  name: check length of any script blocks
+  description: checks that the length of any script blocks in process definitions do not exceed the required length
+  entry: check-process-script-length
+  language: python
+  args: [--max_block_length=20]

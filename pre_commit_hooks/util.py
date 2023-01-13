@@ -3,7 +3,7 @@ from __future__ import annotations
 import re
 
 
-def isolate_process_scripts(contents: list[str]) -> list[str]:
+def isolate_process_scripts(contents: list[str]) -> list[tuple]:
     """
     isolates the process scripts from within the flow
     """
@@ -54,3 +54,21 @@ def write_list_to_file(contents: list, fn: str):
 
             f.write(ln)
             f.write('\n')
+
+
+def get_ignore_flags_on_line(line: str) -> list[str]:
+    """
+    get the flags being pass as ignore arguments on a line
+    """
+
+    ignore_regex = r'^\s*//ignore: ([\w\- ]+)'
+
+    res = re.search(ignore_regex, line)
+
+    if res:
+
+        return [x for x in re.split(' +', res.group(1).strip())]
+
+    else:
+
+        return []

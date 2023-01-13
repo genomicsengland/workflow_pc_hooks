@@ -6,6 +6,7 @@ import re
 from pre_commit_hooks import util
 
 ACCEPTABLE_SHEBANGS = ['bash']
+IGNORE_FLAG = 'detect-non-bash-shebangs'
 
 
 def extract_shebangs(contents: list) -> list:
@@ -38,7 +39,9 @@ def process_file_contents(contents: list, filename: str) -> int:
 
         unacceptable_shebangs = set(shebangs) - set(ACCEPTABLE_SHEBANGS)
 
-        if unacceptable_shebangs:
+        if unacceptable_shebangs and IGNORE_FLAG not in util.get_ignore_flags_on_line(
+            contents[start - 1]
+        ):
 
             retv = 1
 
