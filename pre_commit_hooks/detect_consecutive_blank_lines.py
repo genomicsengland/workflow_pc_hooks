@@ -2,10 +2,10 @@ from __future__ import annotations
 
 import argparse
 
+from pre_commit_hooks import util
 
-def detect_consecutive_blank_lines(
-    contents: list, filename: str = '<unknown>'
-) -> tuple[int, int]:
+
+def detect_consecutive_blank_lines(contents: list) -> tuple[int, list]:
     """
     returns non-zero if the src contains consecutive blank lines
     """
@@ -22,7 +22,6 @@ def detect_consecutive_blank_lines(
             if n_consecutive_blank_lines == 2:
                 retv = 1
                 error_line_nums.append(i)
-                print(f'{filename}: consecutive blank line at line {i}')
 
         else:
             n_consecutive_blank_lines = 0
@@ -49,9 +48,16 @@ def main(argv: list[str] | None = None) -> int:
 
     overall_retcode = 0
     for filename in args.filenames:
-        with open(filename, 'rb') as inputfile:
-            contents = inputfile.readlines()
-        retcode, errors = detect_consecutive_blank_lines(contents, filename)
+        contents = util.read_file_to_list(filename)
+        retcode, errors = detect_consecutive_blank_lines(contents)
         overall_retcode |= retcode
+
+        if retcode == 1:
+
+            new_content = remove_lines(contents, errors)
+
+            util.write_list_to_file(new_content, filename)
+
+            print(f'{len(errors)} blank lines removed from {filename}')
 
     return overall_retcode
