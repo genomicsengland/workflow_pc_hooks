@@ -2,7 +2,7 @@ import tempfile
 import unittest
 
 from pre_commit_hooks import util
-from pre_commit_hooks.detect_consecutive_blank_lines import (
+from pre_commit_hooks.remove_consecutive_blank_lines import (
     detect_consecutive_blank_lines,
     main,
 )
@@ -12,6 +12,7 @@ TESTS = (
     (['a', 'b'], 0, [], ['a', 'b']),
     (['a', '', 'b', ''], 0, [], ['a', '', 'b', '']),
     (['a', '', '', 'b'], 1, [2], ['a', '', 'b']),
+    (['a', '', '', '', 'b'], 1, [2, 3], ['a', '', 'b']),
     (
         ['a', '', '', 'b', '', ''],
         1,

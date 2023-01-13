@@ -19,7 +19,7 @@ def detect_consecutive_blank_lines(contents: list) -> tuple[int, list]:
         if not l.strip():
             n_consecutive_blank_lines += 1
 
-            if n_consecutive_blank_lines == 2:
+            if n_consecutive_blank_lines >= 2:
                 retv = 1
                 error_line_nums.append(i)
 
