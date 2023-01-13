@@ -31,6 +31,31 @@ def isolate_process_scripts(contents: list[str]) -> list[tuple]:
     return bits
 
 
+def read_file_to_list(fn: str) -> list:
+    """
+    read in contents of a file to list of strings
+    """
+
+    with open(fn, 'r') as inputfile:
+
+        contents = inputfile.read().splitlines()
+
+    return contents
+
+
+def write_list_to_file(contents: list, fn: str):
+    """
+    write list of strings to tempfile
+    """
+
+    with open(fn, mode='w+') as f:
+
+        for ln in contents:
+
+            f.write(ln)
+            f.write('\n')
+
+
 def get_ignore_flags_on_line(line: str) -> list[str]:
     """
     get the flags being pass as ignore arguments on a line
